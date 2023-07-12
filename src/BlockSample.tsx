@@ -1,18 +1,59 @@
-import { block } from "../../million/packages/react";
-// import { block } from "million/react";
+// import { block, For } from "../../million/packages/react";
+// import { block, For } from "../../million/react";
+import { block, For } from "../../million/dist/react";
+// import { block, For } from "million/react";
+import { useState } from "react";
 
-type RowProps = {
+type Props = {
   adjective: string;
   color: string;
   noun: string;
 };
 
-export const RowBlock = block(({ adjective, color, noun }: RowProps) => {
+export const UseStateBlock = block(() => {
+  const [state, setState] = useState(0);
+
   return (
-    <tr>
-      <td style={{ [adjective]: "red" }}>{adjective}</td>
-      <td>{color}</td>
-      <td>{noun}</td>
-    </tr>
+    <>
+      <button onClick={() => setState(state + 1)} name="btn">
+        click
+      </button>
+      <p className={`${state === 0 ? "abc" : "cde"}`}>{state}</p>
+      <p>{state}</p>
+    </>
   );
 });
+
+export const RowBlock = block(({ adjective, color }: Props) => (
+  <tr>
+    <td style={{ [adjective]: color }}>{adjective}</td>
+    <td className={`${adjective}_text`}>{`${adjective} test`}</td>
+  </tr>
+));
+
+export function RowBlocks() {
+  const arr = [
+    {
+      adjective: "background",
+      color: "blue",
+      noun: "cat",
+    },
+    {
+      adjective: "backgroundColor",
+      color: "red",
+      noun: "dog",
+    },
+    {
+      adjective: "backgroundColor",
+      color: "green",
+      noun: "mouse",
+    },
+  ];
+  return (
+    <For each={arr}>
+      {({ adjective, color, noun }) => (
+        <RowBlock adjective={adjective} color={color} noun={noun} />
+      )}
+    </For>
+  );
+}
