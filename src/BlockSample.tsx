@@ -1,3 +1,4 @@
+"use client";
 import { block, For } from "../../million/packages/react";
 // import { block, For } from "../../million/react";
 // import { block, For } from "../../million/dist/react";
@@ -6,8 +7,8 @@ import { useState } from "react";
 
 type Props = {
   adjective: string;
-  color: string;
-  noun: string;
+  color?: string;
+  noun?: string;
 };
 
 export const UseStateBlock = block(() => {
@@ -25,12 +26,18 @@ export const UseStateBlock = block(() => {
   );
 });
 
-export const RowBlock = block(({ adjective, color }: Props) => (
-  <tr>
-    <td style={{ [adjective]: color }}>{adjective}</td>
-    <td className={`${adjective}_text`}>{`${adjective} test`}</td>
-  </tr>
-));
+export const RowBlock = block(({ adjective }: Props) => {
+  const [num, setNum] = useState(0);
+  return (
+    <div>
+      <p className={`${adjective}_text`}>{`${adjective} test`}</p>
+      <p>{num}</p>
+      <button onClick={() => setNum(num + 1)} name="btn">
+        click
+      </button>
+    </div>
+  );
+});
 
 export function RowBlocks() {
   const arr = [
@@ -52,9 +59,7 @@ export function RowBlocks() {
   ];
   return (
     <For each={arr}>
-      {({ adjective, color, noun }) => (
-        <RowBlock adjective={adjective} color={color} noun={noun} />
-      )}
+      {({ adjective }) => <RowBlock adjective={adjective} />}
     </For>
   );
 }
