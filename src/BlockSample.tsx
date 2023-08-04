@@ -1,9 +1,10 @@
 "use client";
-// import { block, For } from "../../million/packages/react";
+import { block, For } from "../../million/packages/react";
 // import { block, For } from "../../million/react";
 // import { block, For } from "../../million/dist/react";
-import { block, For } from "million/react";
+// import { block, For } from "million/react";
 import { useState } from "react";
+import { BtnBlock } from "./ChakraBtnBlock";
 
 type Props = {
   adjective: string;
@@ -11,29 +12,63 @@ type Props = {
   noun?: string;
 };
 
-export const UseStateBlock = block(() => {
-  const [state, setState] = useState(0);
-
-  return (
-    <>
-      <button onClick={() => setState(state + 1)} name="btn">
-        click
-      </button>
-      <p className={`${state === 2 ? "abc" : "cde"}`}>{state}</p>
-      <p style={{ color: state === 1 ? "red" : "black" }}>{state}</p>
-      {/* <p style={{ color: `${state} === 1 ? 'red' : 'black'` }}>{state}</p> これはエラー クラス・スタイルでも全体をテンプレートリテラルで囲ったらエラーでるよ */}
-    </>
-  );
-});
-
-export const RowBlock = block(({ adjective }: Props) => {
-  const [num, setNum] = useState(0);
+export const Row = ({ adjective }: Props) => {
+  const [num, setNum] = useState(1);
+  const [bgValue, setBgValue] = useState("gray");
+  const [colorVariation, setColorVariation] = useState("red");
   return (
     <div>
-      <p className={`${adjective}_text`}>{`${adjective} test`}</p>
-      <p>{num}</p>
-      <button onClick={() => setNum(num + 1)} name="btn">
+      <p
+        style={{
+          backgroundColor: colorVariation,
+          color: bgValue,
+          margin: num,
+          padding: 10,
+          opacity: num,
+        }}
+      >
+        opacity{num}
+        {adjective}
+      </p>
+      <button onClick={() => setNum(num - 0.1)} name="btn">
+        set Number
+      </button>
+      <button onClick={() => setBgValue("red")} name="btn">
+        setBgValue
+      </button>
+      <button onClick={() => setColorVariation("blue")} name="btn">
+        setColorVariation
+      </button>
+      <BtnBlock />
+    </div>
+  );
+};
+
+export const RowBlock = block(({ adjective }: Props) => {
+  const [num, setNum] = useState(1);
+  const [bgValue, setBgValue] = useState("gray");
+  const [colorVariation, setColorVariation] = useState("red");
+  return (
+    <div>
+      <p
+        style={{
+          backgroundColor: colorVariation,
+          color: bgValue,
+          padding: 10,
+          margin: num,
+          opacity: num,
+        }}
+      >
+        opacity{num}
+      </p>
+      <button onClick={() => setNum(num - 0.1)} name="btn">
         click
+      </button>
+      <button onClick={() => setBgValue("red")} name="btn">
+        setBgValue
+      </button>
+      <button onClick={() => setColorVariation("blue")} name="btn">
+        setColorVariation
       </button>
     </div>
   );
