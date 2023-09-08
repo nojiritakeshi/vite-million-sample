@@ -1,8 +1,8 @@
 "use client";
-import { block, For } from "../../million/packages/react";
+// import { block, For } from "../../million/packages/react";
 // import { block, For } from "../../million/react";
 // import { block, For } from "../../million/dist/react";
-// import { block, For } from "million/react";
+import { block, For } from "million/react";
 import { useState } from "react";
 import { BtnBlock } from "./ChakraBtnBlock";
 
@@ -44,7 +44,7 @@ export const Row = ({ adjective }: Props) => {
   );
 };
 
-export const RowBlock = block(({ adjective }: Props) => {
+export const RowBlock = ({ adjective }: Props) => {
   const [num, setNum] = useState(1);
   const [bgValue, setBgValue] = useState("gray");
   const [colorVariation, setColorVariation] = useState("red");
@@ -72,7 +72,7 @@ export const RowBlock = block(({ adjective }: Props) => {
       </button>
     </div>
   );
-});
+};
 
 export function RowBlocks() {
   const arr = [

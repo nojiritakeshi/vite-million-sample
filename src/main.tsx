@@ -17,11 +17,11 @@ const theme = extendTheme({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      {/* <App /> */}
-      <Button color={"primary"} bg={"third"} name="BTN">
+      <App />
+      {/* <Button color={"primary"} bg={"third"} name="BTN">
         Button
       </Button>
-      <BtnBlock />
+      <BtnBlock /> */}
     </ChakraProvider>
   </React.StrictMode>
 );
